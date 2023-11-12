@@ -8,9 +8,12 @@ var boter = document.querySelector("button");
 const container = document.getElementById('only');
 var hourTime = document.querySelector("span:first-of-type");
 var dateHTML = document.getElementById('date');
-var nuevoElemento;
+var oneLine;
 var overline;
+var twoLine
 var doubleline;
+var threeLine
+var tripleline;
 
 let romanNumerals = {
   I: 1,
@@ -60,7 +63,7 @@ romanField.addEventListener('input', function(e) {
     else if (!(regexRoman.test(valor) || regexDecimal.test(valor))) {
         e.target.value = '';
     };
-    if (regexDecimal.test(valor)) {base.style.display = 'none'; changelanguaje()} else if (regexRoman.test(valor)) {base.style.display = 'flex'; changelanguaje()};
+    if ((/\d/).test(valor)) {base.style.display = 'none'; changelanguaje()} else if (regexRoman.test(valor)) {base.style.display = 'flex'; changelanguaje()};
     if (!romanField.value) {base.style.display = 'flex'; changelanguaje()};
     del()
 })
@@ -75,7 +78,7 @@ function formatNumber(n) {
 }
 
 function del(){
-  if(!base.innerText && !romanField.value) {text.innerHTML = ''; answer.innerHTML = ''; overline = ''; pseudoElement(); 
+  if(!base.innerText && !romanField.value) {text.innerHTML = ''; answer.innerHTML = ''; overline = ''; 
   removeElement()} 
 };
 
@@ -131,15 +134,23 @@ function decimalToRoman(decimal) {
     return result;
   };
 
+  if (decimal > 3999999999) {
+    var bilions = Math.floor(decimal / 1e9);
+    decimal %= 1e9;
+    tripleline = convert(bilions);
+  } else if (decimal < 4e9) {tripleline = ''}
+  else {tripleline = ''}
+
   if (decimal > 3999999) {
-    var millions = Math.floor(decimal / 1000000);
-    decimal %= 1000000;
+    var millions = Math.floor(decimal / 1e6);
+    decimal %= 1e6;
     doubleline = convert(millions);
-  } else if (decimal < 4000000) {doubleline = ''}
+  } else if (decimal < 4e6) {doubleline = ''}
+  else {doubleline = ''}
 
   if (decimal > 3999) {
-    var thousands = Math.floor(decimal / 1000);
-    decimal %= 1000;
+    var thousands = Math.floor(decimal / 1e3);
+    decimal %= 1e3;
     overline = convert(thousands);
   } else if (decimal < 4000) {overline = ''}
   else {overline = ''}
@@ -149,45 +160,30 @@ function decimalToRoman(decimal) {
 };
 
 function result(){
-  pseudoElement();
   removeElement();
 
-  nuevoElemento = document.createElement("span");
-  nuevoElemento.innerHTML = doubleline;
-  nuevoElemento.style.cssText = 'text-decoration: overline; border-top: 2px solid black; position: relative; padding-top: 4px; font-size: 20px';
-'4000000'
+  if(overline) {oneLine = document.createElement("span");
+  oneLine.innerHTML = overline;
+  oneLine.style.cssText = 'text-decoration: overline; position: relative; padding-top: 4px; font-size: 20px; margin-left: 3px';
+  answer.parentNode.insertBefore(oneLine, answer)}
+
+  if(doubleline) {twoLine = document.createElement("span");
+  twoLine.innerHTML = doubleline;
+  twoLine.style.cssText = 'text-decoration: overline; border-top: 2px solid black; position: relative; padding-top: 4px; font-size: 20px; margin-left: 3px';
+  text.insertAdjacentElement('afterend', twoLine)}
+
+  if(tripleline) {threeLine = document.createElement("span");
+  threeLine.innerHTML = tripleline;
+  threeLine.style.cssText = 'text-decoration: overline; border-top: 2px solid black; position: relative; padding-top: 4px; font-size: 20px; margin-left: 3px';
+  threeLine.classList.add('line-before');
+  text.insertAdjacentElement('afterend', threeLine)}
 
         if (regexRoman.test(romanField.value) || base.innerText) {answer.innerHTML = (Number(romanToDecimal(base.innerText))*1000 + Number(romanToDecimal(romanField.value))).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + '.'; if (answer.classList.contains('margintext')) {answer.classList.remove('margintext')}} 
-        else {answer.innerHTML = romanNumeral + '.'; answer.parentNode.insertBefore(nuevoElemento, answer); 
+        else {answer.innerHTML = romanNumeral + '.';
         answer.classList.add('margintext')};
         if (!romanField.value && !base.innerText) {text.innerText = empty; answer.innerHTML = ''; setTimeout(function() {
           text.innerText = '';
       }, 3000)} else {text.innerText = response};
-};
-
-function pseudoElement(){
-  let stylesheet = document.styleSheets[0]; 
-  let ruleText = `#result::before { content: '${overline}'; text-decoration: overline; font-size: 20px; margin-right: 3px}`;
-
-function pseudoElementExists(selector, pseudoElement) {
-    var sheets = document.styleSheets;
-    var pseudoElementSelector = selector + pseudoElement;
-      
-          for (var i = 0; i < sheets.length; i++) {
-              var rules = sheets[i].cssRules;
-              for (var j = 0; j < rules.length; j++) {
-                  if (rules[j].selectorText === pseudoElementSelector) {
-                      return true;
-                  }
-              }
-          }
-          return false;
-      };
-
-      if (overline) if (!pseudoElementExists("#result", "::before")) {stylesheet.insertRule(ruleText, 0)} 
-      else if (pseudoElementExists("#result", "::before")) {stylesheet.deleteRule(ruleText, 0), stylesheet.insertRule(ruleText, 0)};
-      if (!overline && pseudoElementExists("#result", "::before")) {stylesheet.deleteRule(ruleText, 0);
-    }
 };
 
   const keys = Object.keys(romanNumerals);
@@ -203,7 +199,6 @@ function pseudoElementExists(selector, pseudoElement) {
 
 corrector = (i) => {
   correctorCalled = true;
-  pseudoElement();
   removeElement();
   index = i;
   if (id == 'a') {romanField.value = romanField.value.slice(0, -1)}
@@ -245,7 +240,13 @@ else {romanToDecimal(base.innerText)}
 }
 
 function removeElement() {
-  if (answer.parentNode.contains(nuevoElemento)) {
-    answer.parentNode.removeChild(nuevoElemento);
-};
+  if (text.parentNode.contains(oneLine)) {
+    text.parentNode.removeChild(oneLine);
+  }
+  if (answer.parentNode.contains(twoLine)) {
+    answer.parentNode.removeChild(twoLine)
+  }
+  if (answer.parentNode.contains(threeLine)) {
+    answer.parentNode.removeChild(threeLine)
+  }
 }
