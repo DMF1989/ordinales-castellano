@@ -1,37 +1,33 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Conversor de números romanos</title>
-  </head>
-  <body>
-    <div id="date_hour">
-    <span ondblclick="hourformat()" onclick="decimalHourToggle()"></span>
-    <span id="date" onclick="decimalDateToggle()"></span>
-    </div>
-    <form>
-      <span for="romanNumber"></span>
-      <div id="field">
-      <span contenteditable="true" id="base"></span>
-      <input type="text" autocomplete="off" id="romanNumber">
-      </div>
-      <button type="button" onclick="result()">
-      </button>
-      <div id="fullAnswer"><span id="thousandsText"></span><span id="result"></span></div>
-    </form>
-    <div id ='only'></div>
-    <span id ='checkbox'>
-      <p>Español</p>
-      <label class="switch">
-        <input type="checkbox" checked id="lang">
-        <span class="slider round"></span>
-      </label>
-      <p>English</p>
-      </span>
-    <script type="text/javascript" src="lingua&datum.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-  </body>
+<html lang="es-CU">
+<head>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="/site.webmanifest">
+  <title>Arábigos a ordinales en español</title>
+</head>
+<body onload='change()'>
+  <header><h1>Convertir números decimales a nombres ordinales y cardinales en español</h1></header>
+  <legend>
+    <input id="enter" placeholder="número" type="text" min="0" oninput='submit()'>
+    <button id="incrementButton"></button>
+    <button id="decrementButton"></button>
+  </legend>
+  <article><h3>Nombre ordinal:</h3><span></span><span title ='etimología simple'></span><span title ='etimología simple'></span></article>
+  <div><h3>Nombre cardinal:</h3><span></span></div>
+  <div><input type="checkbox" id="a" title ='escribir decenas de ordinales complejos en una sola palabra'>grafía univerbal</input><input type="checkbox" id="g">nombre femenino</input><input type="checkbox" id='"'>comillas</input><input type="checkbox" id='apocope' onclick='submit()'>apocope</input></div>
+  <div>
+  <label for='mySelect'>elige una letra capital:</label>
+    <select id="mySelect" onchange='selOpt()'>
+      <option value="lowercase">lowercase</option>
+      <option value="capitalize">capitalize</option>
+      <option value="uppercase">uppercase</option>
+    </select>
+  </div> 
+</body>
+<script src="bignumber.js"></script>
+<script src="app.js"></script>
+<script src="ordinales.js"></script>
+<script src="cardinales.js"></script>
+<script src="latin.js"></script>
+<link rel="stylesheet" href="style.css">
 </html>
