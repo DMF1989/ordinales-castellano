@@ -1,0 +1,89 @@
+body {
+    display: grid;
+    justify-items: center;
+}
+legend {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+}
+button {
+    width: 32px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+  }
+#incrementButton {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+#incrementButton:active {
+    background-color: #45a049; /* Darker green */
+}  
+#decrementButton {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+#decrementButton:active {
+    background-color: #d73828; /* Darker red */
+}  
+#incrementButton::after {
+    content: '▲';
+    font-size: 18px;
+  }
+  
+#decrementButton::after {
+    content: '▼';
+    font-size: 18px;
+  }  
+#enter {
+    height: 34px;
+    background-color: #e7eaeb; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    font-size: 30px;
+    text-align: center;
+    grid-row: span 2;
+    width: 200px
+}
+article {
+    display: inline-table;
+    text-align: center;
+    width: 100%;
+    margin: 15px 0px 15px 0px
+}
+h3 {
+    margin: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+div:nth-of-type(1){
+    width: 100%;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+div:nth-of-type(2){
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 10px
+}
+
+span{
+    font-family: Arial, Helvetica, sans-serif;
+}
+span:nth-child(3){
+    display: none;
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+select {
+    font-size: medium;
+    padding-right: 8px;
+}
+
+option {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
