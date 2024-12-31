@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es-CU">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="/site.webmanifest">
+  <title>Arábigos a ordinales en español</title>
+</head>
+
+<body onload='change()'>
+  <header>
+    <h1>Convertir números decimales a nombres cardinales y ordinales en español</h1>
+  </header>
+  <legend>
+    <input id="enter" placeholder="número" type="text" min="0" autocomplete="off" oninput='submit()'>
+    <button id="incrementButton"></button>
+    <button id="decrementButton"></button>
+  </legend>
+  <div>
+    <div id="superindex" style="display: none"><input type="button" value='1' onclick="insertSuperIndex('¹')"><input
+        type="button" value='2' onclick="insertSuperIndex('²')"><input type="button" value='3'
+        onclick="insertSuperIndex('³')"><input type="button" value='4' onclick="insertSuperIndex('⁴')"><input type="button"
+        value='5' onclick="insertSuperIndex('⁵')"><input type="button" value='6' onclick="insertSuperIndex('⁶')"><input
+        type="button" value='7' onclick="insertSuperIndex('⁷')"><input type="button" value='8'
+        onclick="insertSuperIndex('⁸')"><input type="button" value='9' onclick="insertSuperIndex('⁹')"><input type="button"
+        value='0' onclick="insertSuperIndex('⁰')"><input type="button" value='⌫' onclick="insertSuperIndex('backspace')"></div>
+    <h3>Nombre cardinal:</h3><span></span>
+  </div>
+  <div>
+    <h3>Nombre ordinal:</h3><span></span>
+  </div>
+  <div>
+    <h3 id="title">Nombres de polígonos según su número de lados:</h3><span id="poligonos"></span>
+  </div>
+  <div class="checkbox-wrapper-1"><input type="checkbox" class="substituted" aria-hidden="true" id="a"><label for="a"
+      title='escribir decenas de ordinales complejos en una sola palabra'></label>grafía univerbal</input><input
+      type="checkbox" class="substituted" aria-hidden="true" id="g"><label for="g"></label>nombre femenino</input><input
+      type="checkbox" class="substituted" aria-hidden="true" id='apoc' onclick='submit()'><label
+      for='apoc'></label>apócope</input></div>
+  <div>
+    <label for='mySelect'>elige una letra capital:</label>
+    <select id="mySelect" onchange='selOpt()'>
+      <option value="lowercase">lower case</option>
+      <option value="Title case">Title Case</option>
+      <option value="Sentence case">Sentence case</option>
+      <option value="UPPERCASE">UPPER CASE</option>
+    </select>
+  </div>
+</body>
+<script src="big.js"></script>
+<script src="app.js"></script>
+<script src="ordinales.js"></script>
+<script src="cardinales.js"></script>
+<script src="latin.js"></script>
+<script src="poligonos.js"></script>
+<link rel="stylesheet" href="style.css">
+</html>
+
